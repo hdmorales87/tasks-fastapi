@@ -1,4 +1,4 @@
-# Ejemplo FastAPI
+# Tasks FastAPI
 
 Proyecto de ejemplo implementado con FastAPI, utilizando PostgreSQL como base de datos.
 
