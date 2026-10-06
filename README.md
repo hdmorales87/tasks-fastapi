@@ -37,28 +37,62 @@ source .venv/bin/activate
 
 3. Instalar dependencias:
 ```bash
-pip install fastapi uvicorn sqlalchemy psycopg[binary]
+pip install fastapi uvicorn sqlalchemy psycopg[binary] pydantic-settings
 ```
+
+4. Configurar variables de entorno:
+```bash
+# Copiar el archivo de ejemplo
+cp .env.example .env
+
+# Editar .env con tus credenciales de base de datos
+```
+
+Las variables de entorno disponibles son:
+- `DB_DRIVER`: Driver de base de datos (default: postgresql+psycopg)
+- `DB_USERNAME`: Usuario de base de datos (default: postgres)
+- `DB_PASSWORD`: Contraseña de base de datos (default: postgres)
+- `DB_HOST`: Host de base de datos (default: localhost)
+- `DB_PORT`: Puerto de base de datos (default: 5432)
+- `DB_NAME`: Nombre de la base de datos (default: postgres)
 
 ## Configuración de Base de Datos
 
 ### Opción 1: Usar Docker Compose
 
+1. Configurar variables de entorno para Docker:
+```bash
+# Copiar el archivo de ejemplo
+cp .env.docker.example .env
+
+# Editar .env con tus credenciales deseadas
+```
+
+Las variables de entorno disponibles para Docker son:
+- `POSTGRES_USER`: Usuario de PostgreSQL (default: postgres)
+- `POSTGRES_PASSWORD`: Contraseña de PostgreSQL (default: postgres)
+- `POSTGRES_DB`: Nombre de la base de datos (default: postgres)
+- `POSTGRES_PORT`: Puerto de PostgreSQL (default: 5432)
+- `PGADMIN_DEFAULT_EMAIL`: Email para pgAdmin (default: admin@admin.com)
+- `PGADMIN_DEFAULT_PASSWORD`: Contraseña para pgAdmin (default: admin)
+- `PGADMIN_PORT`: Puerto de pgAdmin (default: 5050)
+
+2. Iniciar los contenedores:
 ```bash
 docker-compose up -d
 ```
 
 Esto iniciará:
-- PostgreSQL en puerto 5432
-- pgAdmin en puerto 5050 (http://localhost:5050)
+- PostgreSQL en el puerto configurado (default: 5432)
+- pgAdmin en el puerto configurado (default: 5050, accesible en http://localhost:5050)
 
-Credenciales pgAdmin:
+Credenciales pgAdmin (se configuran en .env):
 - Email: admin@admin.com
 - Password: admin
 
 ### Opción 2: PostgreSQL Local
 
-Asegúrate de tener PostgreSQL instalado y configurado con las credenciales especificadas en `db.py`:
+Asegúrate de tener PostgreSQL instalado y configura las credenciales en el archivo `.env`:
 - Usuario: postgres
 - Password: postgres
 - Base de datos: postgres
@@ -149,6 +183,8 @@ docker-compose down -v
 tasks-fastapi/
 ├── main.py              # Punto de entrada de la aplicación
 ├── db.py                # Configuración de base de datos
+├── .env.example         # Ejemplo de variables de entorno para la aplicación
+├── .env.docker.example  # Ejemplo de variables de entorno para Docker
 ├── docker-compose.yaml  # Configuración Docker
 ├── models/              # Modelos SQLAlchemy
 ├── schemas/             # Esquemas Pydantic
@@ -156,3 +192,18 @@ tasks-fastapi/
 ├── services/            # Lógica de negocio
 └── routers/             # Rutas de la API
 ```
+
+## Seguridad
+
+**Importante**: Los archivos `.env` contienen credenciales sensibles y no deben ser incluidos en el control de versiones. Asegúrate de agregar `.env` a tu archivo `.gitignore`:
+
+```bash
+echo ".env" >> .gitignore
+```
+
+El proyecto incluye archivos de ejemplo como referencia:
+- `.env.example` - Variables de entorno para la aplicación FastAPI
+- `.env.docker.example` - Variables de entorno para Docker Compose
+
+Estos archivos contienen las plantillas de configuración sin valores reales de producción.
+

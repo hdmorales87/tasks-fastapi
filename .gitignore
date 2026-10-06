@@ -35,8 +35,13 @@ env/
 
 # Environment variables
 .env
+.env.docker
 .env.local
 .env.*.local
+
+# Keep example files (don't ignore these)
+!.env.example
+!.env.docker.example
 
 # Database
 *.db
