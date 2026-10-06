@@ -9,3 +9,7 @@ Base.metadata.create_all(engine)
 app = FastAPI()
 
 app.include_router(todo_router)
+
+@app.get("/")
+def read_root():
+    return {"message": "Server is running"}

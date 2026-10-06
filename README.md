@@ -69,13 +69,13 @@ Asegúrate de tener PostgreSQL instalado y configurado con las credenciales espe
 ### Desarrollo (con recarga automática):
 
 ```bash
-uvicorn main:app --reload
+python -m uvicorn main:app --reload
 ```
 
 ### Producción:
 
 ```bash
-uvicorn main:app --host 0.0.0.0 --port 8000
+python -m uvicorn main:app --host 0.0.0.0 --port 8000
 ```
 
 La API estará disponible en: http://localhost:8000
@@ -118,13 +118,13 @@ pip install -r requirements.txt
 
 ```bash
 # Ejecutar aplicación con recarga automática
-uvicorn main:app --reload
+python -m uvicorn main:app --reload
 
 # Ejecutar en puerto específico
-uvicorn main:app --port 8080
+python -m uvicorn main:app --port 8080
 
 # Ejecutar con debug
-uvicorn main:app --reload --log-level debug
+python -m uvicorn main:app --reload --log-level debug
 ```
 
 ### Base de Datos
@@ -146,7 +146,7 @@ docker-compose down -v
 ## Estructura del Proyecto
 
 ```
-ejemplo-fastapi2/
+tasks-fastapi/
 ├── main.py              # Punto de entrada de la aplicación
 ├── db.py                # Configuración de base de datos
 ├── docker-compose.yaml  # Configuración Docker

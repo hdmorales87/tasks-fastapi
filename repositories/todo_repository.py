@@ -1,15 +1,8 @@
 from sqlalchemy.orm import Session
-
 from models.todo import Todo
 
-
-def create(db: Session, todo: Todo):
-    db.add(todo)
-    db.commit()
-    db.refresh(todo)
-
-    return todo
-
+def find_all(db: Session):
+    return db.query(Todo).all()
 
 def find_by_id(db: Session, todo_id: int):
     return (
@@ -18,13 +11,16 @@ def find_by_id(db: Session, todo_id: int):
         .first()
     )
 
+def create(db: Session, todo: Todo):
+    db.add(todo)
+    db.commit()
+    db.refresh(todo)
+    return todo
 
 def update(db: Session, todo: Todo):
     db.commit()
     db.refresh(todo)
-
     return todo
-
 
 def delete(db: Session, todo: Todo):
     db.delete(todo)
