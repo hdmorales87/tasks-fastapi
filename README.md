@@ -63,9 +63,9 @@ Las variables de entorno disponibles son:
 1. Configurar variables de entorno para Docker:
 ```bash
 # Copiar el archivo de ejemplo
-cp .env.docker.example .env
+cp .env.docker.example .env.docker
 
-# Editar .env con tus credenciales deseadas
+# Editar .env.docker con tus credenciales deseadas
 ```
 
 Las variables de entorno disponibles para Docker son:
@@ -79,7 +79,7 @@ Las variables de entorno disponibles para Docker son:
 
 2. Iniciar los contenedores:
 ```bash
-docker-compose up -d
+docker compose --env-file .env.docker up -d
 ```
 
 Esto iniciará:
@@ -165,16 +165,16 @@ python -m uvicorn main:app --reload --log-level debug
 
 ```bash
 # Iniciar contenedores Docker
-docker-compose up -d
+docker compose --env-file .env.docker up -d
 
 # Ver logs de contenedores
-docker-compose logs -f
+docker compose --env-file .env.docker logs -f
 
 # Detener contenedores
-docker-compose down
+docker compose --env-file .env.docker down
 
 # Detener y eliminar volúmenes
-docker-compose down -v
+docker compose --env-file .env.docker down -v
 ```
 
 ## Estructura del Proyecto
